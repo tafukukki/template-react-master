@@ -13,10 +13,10 @@ export default function Users({ signInWithGoogle }) {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          marginTop: 8,
+          marginTop: 20,
         }}
       >
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" color="#4A4A4A">
           Login
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>

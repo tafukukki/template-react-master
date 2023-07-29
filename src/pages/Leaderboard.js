@@ -33,51 +33,51 @@ export default function LeaderBoard() {
 
   return (
     <Box sx={{ height: 400, width: "100%" }}>
-      <Grid container justifyContent="center" alignItems="center">
-        <Grid item xs={4}>
-          <Typography variant="h6" sx={{ color: "#4A4A4A" }} align="center">
-            User Name
-          </Typography>
-        </Grid>
-        <Grid item xs={4}>
-          <Typography variant="h6" sx={{ color: "#4A4A4A" }} align="center">
-            Score
-          </Typography>
-        </Grid>
-        <Grid item xs={4}>
-          {/* This Grid item is here just to maintain the structure. */}
-        </Grid>
+    <Grid container>
+    <Grid display={"flex"} justifyContent="flex-start" item xs={4}>
+        <Typography variant="h6" sx={{ color: "#4A4A4A" }} align="center">
+          Username
+        </Typography>
       </Grid>
-      <List>
-        {leaderboard.map((player, index) => (
-          <Grid
-            sx={{
-              ...(index !== 0 && {
-                mt: 1,
-              }),
-            }}
-            container
-          >
+      <Grid display={"flex"} justifyContent="flex-start" item xs={4}>
+        <Typography variant="h6" sx={{ color: "#4A4A4A" }} align="center">
+          Score
+        </Typography>
+      </Grid>
+      <Grid item xs={4}>
+        {/* This Grid item is here just to maintain the structure. */}
+      </Grid>
+    </Grid>
+    <List>
+      {leaderboard.map((player, index) => (
+        <Box
+          key={`Leaderboard-${index}`}
+          sx={{
+            borderTop: "1px solid #E0E0E0",
+            mt: 2,
+            p: 1,
+          }}
+        >
+          <Grid container>
             <Grid item xs={4}>
               <ListItemText
                 primary={`${index + 1}. ${player.nickname}`}
                 sx={{ color: "#4A4A4A", textTransform: "lowercase" }}
-                align="center"
               />
             </Grid>
             <Grid item xs={4}>
               <ListItemText
                 primary={player.userScore}
                 sx={{ color: "#4A4A4A" }}
-                align="center"
               />
             </Grid>
             <Grid item xs={4}>
               {/* No submit button for leaderboard */}
             </Grid>
           </Grid>
-        ))}
-      </List>
-    </Box>
-  );
+        </Box>
+      ))}
+    </List>
+  </Box>
+);
 }

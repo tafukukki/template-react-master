@@ -4,6 +4,7 @@ import { baseUrl } from "../config/statics";
 
 export default function OnchainLeaderBoard() {
   const [players, setPlayers] = React.useState([]);
+  
   function getPremiumLeaderboard() {
     var myHeaders = new Headers();
     myHeaders.append("x-access-token", sessionStorage.getItem("accessToken"));
@@ -13,6 +14,7 @@ export default function OnchainLeaderBoard() {
       headers: myHeaders,
       redirect: "follow",
     };
+    
     fetch(baseUrl + "users/premiumLeaderboard/", requestOptions)
       .then(async (response) => {
         if (response.status === 200 || response.ok) {
@@ -51,37 +53,37 @@ export default function OnchainLeaderBoard() {
       </Grid>
       <List>
         {players.map((player, index) => (
-          <Grid
+          <Box
             key={`player-${index}`}
             sx={{
-              ...(index !== 0 && {
-                mt: 1,
-              }),
+              borderTop: "1px solid #E0E0E0", // Changed to a lighter grey color
+              mt: 2,
+              p: 1,
             }}
-            container
           >
-            <Grid
-              sx={{}}
-              justifyContent="flex-start"
-              display="flex"
-              item
-              xs={4}
-            >
-              <ListItemText
-                primary={`${index + 1}. ${player?.nickname} `}
-                sx={{ color: "#4A4A4A", textTransform: "lowercase" }}
-              />
+            <Grid container>
+              <Grid
+                justifyContent="flex-start"
+                display="flex"
+                item
+                xs={4}
+              >
+                <ListItemText
+                  primary={`${index + 1}. ${player?.nickname} `}
+                  sx={{ color: "#4A4A4A", textTransform: "lowercase" }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <ListItemText
+                  primary={player?.userScore}
+                  sx={{ color: "#4A4A4A" }}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                {/* No submit button for onchain leaderboard */}
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
-              <ListItemText
-                primary={player?.userScore}
-                sx={{ color: "#4A4A4A" }}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              {/* No submit button for onchain leaderboard */}
-            </Grid>
-          </Grid>
+          </Box>
         ))}
       </List>
     </Box>

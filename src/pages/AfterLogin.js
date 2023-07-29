@@ -28,7 +28,7 @@ export default function AfterLogin() {
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
               <Tab label="My Stats" />
               <Tab label="Leaderboard" />
-              <Tab label="Onchain Leaderboard" />
+              <Tab label="Premium Leaderboard" />
             </Tabs>
           </Box>
           {value === 0 && (
