@@ -36,27 +36,7 @@ const Navigation = () => {
         color: '#fff',
       }}
     >
-      <nav>
-        <ul>
-          <li>
-            <Link to="/Home">Home</Link>
-          </li>
-          <li>
-            <Link to="/MyStats">My Stats</Link>
-          </li>
-          <li>
-            <Link to="/OnchainLeaderboard">OnchainLeaderboard</Link>
-          </li>
-          <li>
-            <Link to="/users">Users</Link>
-          </li><li>
-            <Link to="/Leaderboard">Leaderboard</Link>
-          </li>
-          <li>
-          <Link to="/AfterLogin">AfterLogin</Link>
-        </li>
-        </ul>
-      </nav>
+    
 
       <Switch>
         <Route path="/MyStats">
@@ -65,7 +45,7 @@ const Navigation = () => {
         <Route path="/Leaderboard">
           <Leaderboard />
         </Route>
-        <Route path="/users">
+        <Route path="/">
           <Users
             signInWithGoogle={() => signInWithGoogle(setAuthorizedUser, goHome)}
           />

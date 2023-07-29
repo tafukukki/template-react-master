@@ -1,5 +1,6 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "./config/firebase-config";
+import { baseUrl } from "./config/statics";
 
 export const signInWithGoogle = async (setAuthorizedUser, goHome) => {
   const provider = new GoogleAuthProvider();
@@ -11,13 +12,38 @@ export const signInWithGoogle = async (setAuthorizedUser, goHome) => {
     console.log(result);
     // The signed-in user info.
     const user = result.user;
-    sessionStorage.setItem("accessToken", token);
-    setAuthorizedUser(true);
 
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      token,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(baseUrl + "users/loginOrRegister/", requestOptions)
+      .then(async (response) => {
+        if (response.status === 200 || response.ok) {
+          return Promise.resolve(response.json());
+        }
+        const responseInJson = await Promise.resolve(response.json());
+        return Promise.reject(responseInJson);
+      })
+      .then((result) => {
+        console.log("result", result);
+        sessionStorage.setItem("accessToken", result?.token);
+        sessionStorage.setItem("user", user.displayName);
+        setAuthorizedUser(true);
+        goHome?.();
+      })
+      .catch((error) => console.log("error", error));
     // If user is successfully logged in, redirect to home
-    if (user) {
-      goHome?.();
-    }
 
     return user;
   } catch (error) {
