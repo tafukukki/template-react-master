@@ -87,7 +87,7 @@ export default function MyStats() {
       const provider = getProvider();
       const program = await getProgram();
 
-      await program.rpc.addGif(inputValue, "another value", {
+      await program.rpc.addUser(inputValue, "another value", {
         accounts: {
           baseAccount: baseAccount.publicKey,
           user: provider.wallet.publicKey,
